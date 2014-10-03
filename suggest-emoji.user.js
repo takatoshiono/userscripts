@@ -9,14 +9,15 @@
 (function(){
   console.log("hello, this is suggest-emoji");
   var ime = false;
-  document.onkeydown = function(evt) {
+  document.addEventListener('keydown', function(evt) {
     // IME が on のときは keydown が 229 になる
     if (evt.keyCode == 229) {
       ime = true;
     }
-  };
-  document.onkeyup = function(evt) {
+  }, false);
+
+  document.addEventListener('keyup', function(evt) {
     if (ime == false) { return; }
     console.log(evt);
-  };
+  }, false);
 })();
