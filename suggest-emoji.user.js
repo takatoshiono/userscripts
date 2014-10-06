@@ -7,6 +7,18 @@
 // @include       https://github.com/*
 // ==/UserScript==
 (function(){
+  var inputKeyCodes = {
+    keycodes: [],
+
+    add: function(keyCode) {
+      this.keycodes.push(keyCode);
+    },
+
+    clear: function() {
+      this.keycodes = [];
+    }
+  };
+
   console.log("hello, this is suggest-emoji");
   var ime = false;
   document.addEventListener('keydown', function(evt) {
@@ -18,6 +30,25 @@
 
   document.addEventListener('keyup', function(evt) {
     if (ime == false) { return; }
+    if (evt.keyCode === 13) { // Enter
+      inputKeyCodes.clear();
+      return;
+    } else if (evt.keyCode === 27) { // Esc
+      inputKeyCodes.clear();
+      return;
+    }
+
     console.log(evt);
+    inputKeyCodes.add(evt.keyCode);
+
+    // <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
+    img = document.createElement('img');
+    img.class = 'emoji';
+    img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
+    img.height = 20;
+    img.width = 20;
+    img.align = 'absmiddle';
+    emojiArea = document.getElementById('emoji');
+    document.body.insertBefore(img, emojiArea);
   }, false);
 })();
