@@ -43,7 +43,14 @@
         return;
       }
 
-      console.log(this);
+      //console.log(this); --> textarea になる
+      textareas = document.getElementsByTagName('textarea');
+      for (var i = 0; i < textareas.length; i++) {
+        if (this === textareas[i]) {
+          console.log('matched: ' + i.toString());
+        }
+      }
+
       console.log(evt);
       inputKeyCodes.add(evt.keyCode);
 
