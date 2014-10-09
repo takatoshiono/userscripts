@@ -20,37 +20,42 @@
   };
 
   console.log("hello, this is suggest-emoji");
-  var ime = false;
-  document.addEventListener('keydown', function(evt) {
-    // IME が on のときは keydown が 229 になる
-    if (evt.keyCode == 229) {
-      // FIXME: いつ false に戻すの？
-      ime = true;
-    }
-  }, false);
 
-  document.getElementById('suggester').addEventListener('keyup', function(evt) {
-    if (ime == false) { return; }
-    if (evt.keyCode === 13) { // Enter
-      inputKeyCodes.clear();
-      return;
-    } else if (evt.keyCode === 27) { // Esc
-      inputKeyCodes.clear();
-      return;
-    }
+  window.onload = function() {
+    console.log("windows.onload");
 
-    console.log(this);
-    console.log(evt);
-    inputKeyCodes.add(evt.keyCode);
+    var ime = false;
+    document.addEventListener('keydown', function(evt) {
+      // IME が on のときは keydown が 229 になる
+      if (evt.keyCode == 229) {
+        // FIXME: いつ false に戻すの？
+        ime = true;
+      }
+    }, false);
 
-    // <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
-    img = document.createElement('img');
-    img.class = 'emoji';
-    img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
-    img.height = 20;
-    img.width = 20;
-    img.align = 'absmiddle';
-    emojiArea = document.getElementById('emoji');
-    document.body.insertBefore(img, emojiArea);
-  }, false);
+    document.getElementById('suggester').addEventListener('keyup', function(evt) {
+      if (ime == false) { return; }
+      if (evt.keyCode === 13) { // Enter
+        inputKeyCodes.clear();
+        return;
+      } else if (evt.keyCode === 27) { // Esc
+        inputKeyCodes.clear();
+        return;
+      }
+
+      console.log(this);
+      console.log(evt);
+      inputKeyCodes.add(evt.keyCode);
+
+      // <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
+      img = document.createElement('img');
+      img.class = 'emoji';
+      img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
+      img.height = 20;
+      img.width = 20;
+      img.align = 'absmiddle';
+      emojiArea = document.getElementById('emoji');
+      document.body.insertBefore(img, emojiArea);
+    }, false);
+  };
 })();
