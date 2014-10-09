@@ -24,11 +24,12 @@
   document.addEventListener('keydown', function(evt) {
     // IME が on のときは keydown が 229 になる
     if (evt.keyCode == 229) {
+      // FIXME: いつ false に戻すの？
       ime = true;
     }
   }, false);
 
-  document.addEventListener('keyup', function(evt) {
+  document.getElementById('suggester').addEventListener('keyup', function(evt) {
     if (ime == false) { return; }
     if (evt.keyCode === 13) { // Enter
       inputKeyCodes.clear();
@@ -38,6 +39,7 @@
       return;
     }
 
+    console.log(this);
     console.log(evt);
     inputKeyCodes.add(evt.keyCode);
 
