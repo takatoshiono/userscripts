@@ -34,7 +34,7 @@
       }
     }, false);
 
-    document.getElementById('suggester').addEventListener('keyup', function(evt) {
+    document.getElementById('my-suggester').addEventListener('keyup', function(evt) {
       if (ime == false) { return; }
       if (evt.keyCode === 13) { // Enter
         inputKeyCodes.clear();
@@ -63,7 +63,7 @@
       img.width = 20;
       img.align = 'absmiddle';
       emojiArea = document.getElementById('emoji');
-      document.body.insertBefore(img, emojiArea);
+      emojiArea.insertBefore(img);
     }, false);
   };
 })();
