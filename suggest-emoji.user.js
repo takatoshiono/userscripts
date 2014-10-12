@@ -79,6 +79,10 @@
         }
       }
 
+      // suggest したい li を作る
+      navigationItem = createEmojiElement('+1');
+      console.log(navigationItem);
+
       console.log(evt);
       inputKeyCodes.add(evt.keyCode);
 
@@ -107,5 +111,25 @@
       }
     }
     return;
+  }
+
+  // <li class="js-navigation-item navigation-focus" data-value="8ball" data-text="8ball pool billiards">
+  //   <span class="emoji-icon" style="background-image:url(https://assets-cdn.github.com/images/icons/emoji/unicode/1f3b1.png)"></span>
+  //   8ball
+  // </li>
+  function createEmojiElement(emojiName) {
+    var icon = document.createElement('span');
+    icon.className = 'emoji-icon';
+    icon.style.backgroundImage = 'url(https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png)';
+
+    var item = document.createElement('li');
+    item.className = 'js-navigation-item';
+    item.setAttribute('data-value', emojiName);
+    item.setAttribute('data-text', '+1 thumbsup approve ok');
+
+    item.insertBefore(icon);
+    item.insertBefore(document.createTextNode(emojiName));
+
+    return item;
   }
 })();
