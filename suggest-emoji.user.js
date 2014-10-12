@@ -52,6 +52,21 @@
         }
       }
 
+      // その親要素が持つ div.suggester-container を取得
+      var jsSuggesterContainer = this.parentNode;
+      console.log(jsSuggesterContainer);
+      if (!jsSuggesterContainer.hasChildNodes()) { return; }
+      var children = jsSuggesterContainer.children;
+      for (var i = 0; i < children.length; i++) {
+       if (children[i].tagName === 'DIV' && children[i].className.indexOf('suggester-container') !== -1) {
+         console.log("found");
+         var suggesterContainer = children[i];
+         break;
+       }
+      }
+      if (typeof suggesterContainer === 'undefined') { return; }
+      console.log(suggesterContainer);
+
       console.log(evt);
       inputKeyCodes.add(evt.keyCode);
 
