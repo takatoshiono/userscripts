@@ -81,6 +81,7 @@
 
       // suggest したい li を作る
       navigationItem = createEmojiElement('+1');
+      emojiSuggestions.insertBefore(navigationItem);
       console.log(navigationItem);
 
       console.log(evt);
