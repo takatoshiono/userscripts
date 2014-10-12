@@ -73,6 +73,10 @@
       } else {
         // li 要素を削除する
         console.log('delete');
+        var jsNavigationItems = emojiSuggestions.children;
+        for (var i = 0; i < children.length; i++) {
+          emojiSuggestions.removeChild(children[i]);
+        }
       }
 
       console.log(evt);
