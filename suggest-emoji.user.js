@@ -28,8 +28,9 @@
     document.addEventListener('keydown', function(evt) {
       // IME が on のときは keydown が 229 になる
       if (evt.keyCode == 229) {
-        // FIXME: いつ false に戻すの？
         ime = true;
+      } else {
+        ime = false;
       }
     }, false);
 
