@@ -84,6 +84,13 @@
       emojiSuggestions.insertBefore(navigationItem);
       console.log(navigationItem);
 
+      // TODO:div.suggester-containerの top, left を設定する（カーソル位置と同じ？）
+      // ググったら一発目でこれが出てきた
+      // http://qiita.com/yuku_t/items/fb92e173120d7b2e49ed
+
+      // ul.suggestions を display:block にする
+      emojiSuggestions.style.display = 'block';
+
       console.log(evt);
       inputKeyCodes.add(evt.keyCode);
 
