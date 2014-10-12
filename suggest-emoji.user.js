@@ -57,6 +57,19 @@
       if (typeof suggesterContainer === 'undefined') { return; }
       console.log(suggesterContainer);
 
+      // その中に div.suggester > ul.emoji-suggestions があるか確認
+      var suggester = getChildNode(suggesterContainer, 'DIV', 'suggester');
+      if (typeof suggester === 'undefined') { return; }
+      console.log(suggester);
+
+      var emojiSuggestions = getChildNode(suggester, 'UL', 'emoji-suggestions');
+      if (typeof emojiSuggestions === 'undefined') {
+        // suggester の中にul.emoji-suggestionsを作る
+      } else {
+        // li 要素を削除する
+        console.log('delete');
+      }
+
       console.log(evt);
       inputKeyCodes.add(evt.keyCode);
 
