@@ -53,17 +53,7 @@
       }
 
       // その親要素が持つ div.suggester-container を取得
-      var jsSuggesterContainer = this.parentNode;
-      console.log(jsSuggesterContainer);
-      if (!jsSuggesterContainer.hasChildNodes()) { return; }
-      var children = jsSuggesterContainer.children;
-      for (var i = 0; i < children.length; i++) {
-       if (children[i].tagName === 'DIV' && children[i].className.indexOf('suggester-container') !== -1) {
-         console.log("found");
-         var suggesterContainer = children[i];
-         break;
-       }
-      }
+      var suggesterContainer = getChildNode(this.parentNode, 'DIV', 'suggester-container');
       if (typeof suggesterContainer === 'undefined') { return; }
       console.log(suggesterContainer);
 
@@ -81,4 +71,19 @@
       emojiArea.insertBefore(img);
     }, false);
   };
+
+  function getChildNode(element, tagName, className) {
+    console.log(element);
+    if (!element.hasChildNodes()) { return; }
+    var children = element.children;
+    for (var i = 0; i < children.length; i++) {
+      if (children[i].tagName === tagName
+          && children[i].className.indexOf(className) !== -1
+      ) {
+        console.log("found");
+        return children[i];
+      }
+    }
+    return;
+  }
 })();
