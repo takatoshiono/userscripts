@@ -65,6 +65,11 @@
       var emojiSuggestions = getChildNode(suggester, 'UL', 'emoji-suggestions');
       if (typeof emojiSuggestions === 'undefined') {
         // suggester の中にul.emoji-suggestionsを作る
+        console.log('create');
+        emojiSuggestions = document.createElement('ul');
+        emojiSuggestions.className = 'emoji-suggestions';
+        emojiSuggestions.style.display = 'none';
+        suggester.insertBefore(emojiSuggestions);
       } else {
         // li 要素を削除する
         console.log('delete');
