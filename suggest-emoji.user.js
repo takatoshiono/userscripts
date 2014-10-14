@@ -74,8 +74,8 @@
         // li 要素を削除する
         console.log('delete');
         var jsNavigationItems = emojiSuggestions.children;
-        for (var i = 0; i < children.length; i++) {
-          emojiSuggestions.removeChild(children[i]);
+        for (var i = 0; i < jsNavigationItems.length; i++) {
+          emojiSuggestions.removeChild(jsNavigationItems[i]);
         }
       }
 
