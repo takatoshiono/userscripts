@@ -105,15 +105,15 @@
     console.log(evt);
     inputKeyCodes.add(evt.keyCode);
 
-    // <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
-    img = document.createElement('img');
-    img.class = 'emoji';
-    img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
-    img.height = 20;
-    img.width = 20;
-    img.align = 'absmiddle';
-    emojiArea = document.getElementById('emoji');
-    emojiArea.insertBefore(img);
+    //// <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
+    //img = document.createElement('img');
+    //img.class = 'emoji';
+    //img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
+    //img.height = 20;
+    //img.width = 20;
+    //img.align = 'absmiddle';
+    //emojiArea = document.getElementById('emoji');
+    //emojiArea.insertBefore(img);
   }
 
   function getChildNode(element, tagName, className) {
