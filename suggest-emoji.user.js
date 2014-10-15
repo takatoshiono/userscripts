@@ -60,7 +60,7 @@
     }
 
     // その親要素が持つ div.suggester-container を取得
-    var suggesterContainer = getChildNode(this.parentNode, 'DIV', 'suggester-container');
+    var suggesterContainer = getChildNode(this.parentNode.parentNode, 'DIV', 'suggester-container');
     if (typeof suggesterContainer === 'undefined') { return; }
     console.log(suggesterContainer);
 
