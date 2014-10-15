@@ -33,7 +33,12 @@
       }
     }, false);
 
-    document.getElementById('my-suggester').addEventListener('keyup', suggest, false);
+    textareas = document.getElementsByTagName('textarea');
+    for (var i = 0; i < textareas.length; i++) {
+      if (textareas[i].className === 'js-suggester-field') {
+        textareas[i].addEventListener('keyup', suggest, false);
+      }
+    }
   };
 
   function suggest(evt) {
