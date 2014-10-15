@@ -87,6 +87,10 @@
       // TODO:div.suggester-containerの top, left を設定する（カーソル位置と同じ？）
       // ググったら一発目でこれが出てきた
       // http://qiita.com/yuku_t/items/fb92e173120d7b2e49ed
+      var caret = getCaret(this);
+      suggesterContainer.style.top = caret.top;
+      suggesterContainer.style.left = caret.left;
+      console.log("top:" + caret.top + ", left:" + caret.left);
 
       // ul.suggestions を display:block にする
       emojiSuggestions.style.display = 'block';
@@ -139,5 +143,61 @@
     item.insertBefore(document.createTextNode(emojiName));
 
     return item;
+  }
+
+  // ref: http://qiita.com/yuku_t/items/fb92e173120d7b2e49ed
+  function getCaret(textarea) {
+    var start = textarea.selectionStart;
+    console.log("start:" + start);
+
+    // 先頭からカーソル位置までを取得する
+    var text = textarea.value.substring(0, start);
+    console.log("text:" + text);
+
+    // textareaを模倣したdiv要素を用意する
+    var i,
+        div   = document.createElement('div'),
+        list  = ['border-bottom-width', 'border-left-width', 'border-right-width',
+                'border-top-width', 'font-family', 'font-size', 'font-style',
+                'font-variant', 'font-weight', 'height', 'letter-spacing',
+                'word-spacing', 'line-height', 'padding-bottom', 'padding-left',
+                'padding-right', 'padding-top', 'text-decoration', 'width'];
+
+    // 画面外に配置する
+    div.style.position = 'absolute';
+    div.style.top      = 0;
+    div.style.left     = -9999;
+
+    // textareaのスタイルをコピーする
+    for (i = 0; i < list.length; i++) {
+      div.style[list[i]] = textarea.style[list[i]];
+    }
+
+    // divを画面に挿入する
+    document.body.appendChild(div);
+
+    // カーソルまでの文字列とspanを末尾に入れてspanの位置を計算する
+
+    var span = document.createElement('span');
+    span.id = 'dummy-for-suggest';
+    // spanに大きさをもたせるために適当な文字列を挿入
+    span.innerHTML = '&nbsp;';
+
+    // 文字列を挿入
+    div.textContent = text;
+    // スクロール位置を調整
+    div.scrollTop = div.scrollHeight;
+    // spanを挿入
+    div.appendChild(span);
+
+    // spanの位置を取得。簡単のためにjQueryを使っている
+    //var position = $(span).position();
+    //var position = document.getElementById('dummy-for-suggest').position();
+    //var temp = document.getElementById('dummy-for-suggest');
+
+    return {
+      top: span.offsetTop,
+      left: span.offsetLeft,
+    };
   }
 })();
