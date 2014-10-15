@@ -35,7 +35,7 @@
 
     textareas = document.getElementsByTagName('textarea');
     for (var i = 0; i < textareas.length; i++) {
-      if (textareas[i].className === 'js-suggester-field') {
+      if (textareas[i].className.indexOf('js-suggester-field') !== -1) {
         textareas[i].addEventListener('keyup', suggest, false);
       }
     }
