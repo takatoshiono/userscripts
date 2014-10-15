@@ -19,12 +19,11 @@
     }
   };
 
+  var ime = false;
+
   console.log("hello, this is suggest-emoji");
 
   window.onload = function() {
-    console.log("windows.onload");
-
-    var ime = false;
     document.addEventListener('keydown', function(evt) {
       // IME が on のときは keydown が 229 になる
       if (evt.keyCode == 229) {
@@ -34,81 +33,83 @@
       }
     }, false);
 
-    document.getElementById('my-suggester').addEventListener('keyup', function(evt) {
-      if (ime == false) { return; }
-      if (evt.keyCode === 13) { // Enter
-        inputKeyCodes.clear();
-        return;
-      } else if (evt.keyCode === 27) { // Esc
-        inputKeyCodes.clear();
-        return;
-      }
-
-      //console.log(this); --> textarea になる
-      textareas = document.getElementsByTagName('textarea');
-      for (var i = 0; i < textareas.length; i++) {
-        if (this === textareas[i]) {
-          console.log('matched: ' + i.toString());
-        }
-      }
-
-      // その親要素が持つ div.suggester-container を取得
-      var suggesterContainer = getChildNode(this.parentNode, 'DIV', 'suggester-container');
-      if (typeof suggesterContainer === 'undefined') { return; }
-      console.log(suggesterContainer);
-
-      // その中に div.suggester > ul.emoji-suggestions があるか確認
-      var suggester = getChildNode(suggesterContainer, 'DIV', 'suggester');
-      if (typeof suggester === 'undefined') { return; }
-      console.log(suggester);
-
-      var emojiSuggestions = getChildNode(suggester, 'UL', 'emoji-suggestions');
-      if (typeof emojiSuggestions === 'undefined') {
-        // suggester の中にul.emoji-suggestionsを作る
-        console.log('create');
-        emojiSuggestions = document.createElement('ul');
-        emojiSuggestions.className = 'emoji-suggestions';
-        emojiSuggestions.style.display = 'none';
-        suggester.insertBefore(emojiSuggestions);
-      } else {
-        // li 要素を削除する
-        console.log('delete');
-        var jsNavigationItems = emojiSuggestions.children;
-        for (var i = 0; i < jsNavigationItems.length; i++) {
-          emojiSuggestions.removeChild(jsNavigationItems[i]);
-        }
-      }
-
-      // suggest したい li を作る
-      navigationItem = createEmojiElement('+1');
-      emojiSuggestions.insertBefore(navigationItem);
-      console.log(navigationItem);
-
-      // TODO:div.suggester-containerの top, left を設定する（カーソル位置と同じ？）
-      // ググったら一発目でこれが出てきた
-      // http://qiita.com/yuku_t/items/fb92e173120d7b2e49ed
-      var caret = getCaret(this);
-      suggesterContainer.style.top = caret.top;
-      suggesterContainer.style.left = caret.left;
-      console.log("top:" + caret.top + ", left:" + caret.left);
-
-      // ul.suggestions を display:block にする
-      emojiSuggestions.style.display = 'block';
-
-      console.log(evt);
-      inputKeyCodes.add(evt.keyCode);
-
-      // <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
-      img = document.createElement('img');
-      img.class = 'emoji';
-      img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
-      img.height = 20;
-      img.width = 20;
-      img.align = 'absmiddle';
-      emojiArea = document.getElementById('emoji');
-      emojiArea.insertBefore(img);
-    }, false);
+    document.getElementById('my-suggester').addEventListener('keyup', suggest, false);
   };
+
+  function suggest(evt) {
+    if (ime == false) { return; }
+    if (evt.keyCode === 13) { // Enter
+      inputKeyCodes.clear();
+      return;
+    } else if (evt.keyCode === 27) { // Esc
+      inputKeyCodes.clear();
+      return;
+    }
+
+    //console.log(this); --> textarea になる
+    textareas = document.getElementsByTagName('textarea');
+    for (var i = 0; i < textareas.length; i++) {
+      if (this === textareas[i]) {
+        console.log('matched: ' + i.toString());
+      }
+    }
+
+    // その親要素が持つ div.suggester-container を取得
+    var suggesterContainer = getChildNode(this.parentNode, 'DIV', 'suggester-container');
+    if (typeof suggesterContainer === 'undefined') { return; }
+    console.log(suggesterContainer);
+
+    // その中に div.suggester > ul.emoji-suggestions があるか確認
+    var suggester = getChildNode(suggesterContainer, 'DIV', 'suggester');
+    if (typeof suggester === 'undefined') { return; }
+    console.log(suggester);
+
+    var emojiSuggestions = getChildNode(suggester, 'UL', 'emoji-suggestions');
+    if (typeof emojiSuggestions === 'undefined') {
+      // suggester の中にul.emoji-suggestionsを作る
+      console.log('create');
+      emojiSuggestions = document.createElement('ul');
+      emojiSuggestions.className = 'emoji-suggestions';
+      emojiSuggestions.style.display = 'none';
+      suggester.insertBefore(emojiSuggestions);
+    } else {
+      // li 要素を削除する
+      console.log('delete');
+      var jsNavigationItems = emojiSuggestions.children;
+      for (var i = 0; i < jsNavigationItems.length; i++) {
+        emojiSuggestions.removeChild(jsNavigationItems[i]);
+      }
+    }
+
+    // suggest したい li を作る
+    navigationItem = createEmojiElement('+1');
+    emojiSuggestions.insertBefore(navigationItem);
+    console.log(navigationItem);
+
+    // TODO:div.suggester-containerの top, left を設定する（カーソル位置と同じ？）
+    // ググったら一発目でこれが出てきた
+    // http://qiita.com/yuku_t/items/fb92e173120d7b2e49ed
+    var caret = getCaret(this);
+    suggesterContainer.style.top = caret.top;
+    suggesterContainer.style.left = caret.left;
+    console.log("top:" + caret.top + ", left:" + caret.left);
+
+    // ul.suggestions を display:block にする
+    emojiSuggestions.style.display = 'block';
+
+    console.log(evt);
+    inputKeyCodes.add(evt.keyCode);
+
+    // <img class="emoji" title=":100:" alt=":100:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png" height="20" width="20" align="absmiddle">
+    img = document.createElement('img');
+    img.class = 'emoji';
+    img.src = 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png';
+    img.height = 20;
+    img.width = 20;
+    img.align = 'absmiddle';
+    emojiArea = document.getElementById('emoji');
+    emojiArea.insertBefore(img);
+  }
 
   function getChildNode(element, tagName, className) {
     console.log(element);
