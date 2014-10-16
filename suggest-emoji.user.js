@@ -99,6 +99,8 @@
     suggester.style.left = caret.left.toString() + 'px';
     console.log("top:" + caret.top + ", left:" + caret.left);
 
+    suggester.className = suggester.className + ' active'
+
     // ul.suggestions を display:block にする
     emojiSuggestions.style.display = 'block';
 
