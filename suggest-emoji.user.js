@@ -95,8 +95,8 @@
     // ググったら一発目でこれが出てきた
     // http://qiita.com/yuku_t/items/fb92e173120d7b2e49ed
     var caret = getCaret(this);
-    suggesterContainer.style.top = caret.top;
-    suggesterContainer.style.left = caret.left;
+    suggester.style.top = caret.top.toString() + 'px';
+    suggester.style.left = caret.left.toString() + 'px';
     console.log("top:" + caret.top + ", left:" + caret.left);
 
     // ul.suggestions を display:block にする
