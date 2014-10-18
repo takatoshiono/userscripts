@@ -174,7 +174,7 @@
     // 画面外に配置する
     div.style.position = 'absolute';
     div.style.top      = 0;
-    div.style.left     = -9999;
+    div.style.left     = '-9999px';
 
     // textareaのスタイルをコピーする
     for (i = 0; i < list.length; i++) {
