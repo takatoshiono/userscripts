@@ -163,21 +163,26 @@
     console.log("text:" + text);
 
     // textareaを模倣したdiv要素を用意する
-    var i,
-        div   = document.createElement('div'),
-        list  = ['border-bottom-width', 'border-left-width', 'border-right-width',
-                'border-top-width', 'font-family', 'font-size', 'font-style',
-                'font-variant', 'font-weight', 'height', 'letter-spacing',
-                'word-spacing', 'line-height', 'padding-bottom', 'padding-left',
-                'padding-right', 'padding-top', 'text-decoration', 'width'];
+    var div = document.getElementById('textarea-clone');
+    if (!div) {
+      div = document.createElement('div');
+    }
+
+    var list  = ['border-bottom-width', 'border-left-width', 'border-right-width',
+                 'border-top-width', 'font-family', 'font-size', 'font-style',
+                 'font-variant', 'font-weight', 'height', 'letter-spacing',
+                 'word-spacing', 'line-height', 'padding-bottom', 'padding-left',
+                 'padding-right', 'padding-top', 'text-decoration', 'width'];
+
+    div.id = 'textarea-clone';
 
     // 画面外に配置する
     div.style.position = 'absolute';
     div.style.top      = 0;
-    div.style.left     = -9999;
+    div.style.left     = '-9999px';
 
     // textareaのスタイルをコピーする
-    for (i = 0; i < list.length; i++) {
+    for (var i = 0; i < list.length; i++) {
       div.style[list[i]] = textarea.style[list[i]];
     }
 
@@ -187,7 +192,6 @@
     // カーソルまでの文字列とspanを末尾に入れてspanの位置を計算する
 
     var span = document.createElement('span');
-    span.id = 'dummy-for-suggest';
     // spanに大きさをもたせるために適当な文字列を挿入
     span.innerHTML = '&nbsp;';
 
