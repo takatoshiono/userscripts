@@ -209,7 +209,7 @@
 
     return {
       top: span.offsetTop,
-      left: span.offsetLeft,
+      left: span.offsetLeft + 20, // 位置を少し右に修正する
     };
   }
 })();
