@@ -76,7 +76,7 @@
       emojiSuggestions = document.createElement('ul');
       emojiSuggestions.className = 'emoji-suggestions';
       emojiSuggestions.style.display = 'none';
-      suggester.insertBefore(emojiSuggestions);
+      suggester.appendChild(emojiSuggestions);
     } else {
       // li 要素を削除する
       console.log('delete');
@@ -88,7 +88,7 @@
 
     // suggest したい li を作る
     navigationItem = createEmojiElement('+1');
-    emojiSuggestions.insertBefore(navigationItem);
+    emojiSuggestions.appendChild(navigationItem);
     console.log(navigationItem);
 
     // TODO:div.suggester-containerの top, left を設定する（カーソル位置と同じ？）
@@ -115,7 +115,7 @@
     //img.width = 20;
     //img.align = 'absmiddle';
     //emojiArea = document.getElementById('emoji');
-    //emojiArea.insertBefore(img);
+    //emojiArea.appendChild(img);
   }
 
   function getChildNode(element, tagName, className) {
@@ -147,8 +147,8 @@
     item.setAttribute('data-value', emojiName);
     item.setAttribute('data-text', '+1 thumbsup approve ok');
 
-    item.insertBefore(icon);
-    item.insertBefore(document.createTextNode(emojiName));
+    item.appendChild(icon);
+    item.appendChild(document.createTextNode(emojiName));
 
     return item;
   }
